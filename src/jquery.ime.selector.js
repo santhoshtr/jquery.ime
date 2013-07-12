@@ -474,6 +474,7 @@
 		 */
 		prepareInputMethods: function ( languageCode ) {
 			var language = $.ime.languages[languageCode],
+				imeselector = this,
 				$imeList = this.$menu.find( '.ime-list' );
 
 			$imeList.empty();
@@ -489,6 +490,9 @@
 						$imeItem
 					)
 					.addClass( 'ime-im' );
+				if ( imeselector.options.helpHandler ) {
+					$inputMethod.append( imeselector.options.helpHandler.call( imeselector, inputmethod ) );
+				}
 				$imeList.append( $inputMethod );
 			} );
 		},

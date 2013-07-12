@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="utf-8" />
+
+<title>jQuery IME example</title>
+<meta name="author" content="Santhosh Thottingal" />
+<link href="../css/jquery.ime.css" rel="stylesheet" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js" ></script>
+<script src="../src/jquery.ime.js"></script>
+<script src="../src/jquery.ime.selector.js"></script>
+<script src="../src/jquery.ime.preferences.js"></script>
+<script src="../src/jquery.ime.inputmethods.js"></script>
+
+<script src="jquery.uls/jquery.uls.js"></script>
+<link href="jquery.uls/css/jquery.uls.css" rel="stylesheet" />
+<!-- Demo -->
+<link href="demo.css" rel="stylesheet" />
+<script>
+$( document ).ready( function () {
+
+
+	// Load the ime preferences
+	$.ime.preferences.load();
+
+	$( 'body' ).on( 'focus.ime', 'input,textarea', function () {
+		var $input = $( this );
+			$input.ime( {
+			helpHandler: function ( inputMethod ) {
+				return $( '<span>' )
+					.addClass( 'help' )
+					.css( {
+						float: 'right',
+						border: '1px solid green',
+						'border-radius': '4px'
+					} )
+					.text( '?' );
+			}
+			} );
+	} );
+} );
+</script>
+</head>
+
+<body>
+	<div>
+		<header>
+			<h1>jQuery IME Demo</h1>
+		</header>
+		<div>
+			<input type="text" />
+		</div>
+		<div>
+			<textarea></textarea>
+		</div>
+
+		<footer>
+			<p>&copy; Copyright by Santhosh Thottingal</p>
+		</footer>
+	</div>
+</body>
+</html>

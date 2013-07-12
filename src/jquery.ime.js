@@ -307,7 +307,8 @@
 	// default options
 	$.ime.defaults = {
 		imePath: '../', // Relative/Absolute path for the rules folder of jquery.ime
-		languages: [] // Languages to be used- by default all languages
+		languages: [], // Languages to be used- by default all languages
+		helpHandler: null
 	};
 
 	// private function for debugging
