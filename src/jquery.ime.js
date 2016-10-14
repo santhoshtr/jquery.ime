@@ -548,6 +548,26 @@
 	}
 
 	function getDivCaretPosition( element ) {
+		var caretOffset = 0;
+		var doc = element.ownerDocument || element.document;
+		var win = doc.defaultView || doc.parentWindow;
+		var sel;
+		if (typeof win.getSelection != "undefined") {
+			var range = win.getSelection().getRangeAt(0);
+			var preCaretRange = range.cloneRange();
+			preCaretRange.selectNodeContents(element);
+			preCaretRange.setEnd(range.endContainer, range.endOffset);
+			caretOffset = preCaretRange.toString().length;
+		} else if ( (sel = doc.selection) && sel.type != "Control") {
+			var textRange = sel.createRange();
+			var preCaretTextRange = doc.body.createTextRange();
+			preCaretTextRange.moveToElementText(element);
+			preCaretTextRange.setEndPoint("EndToEnd", textRange);
+			caretOffset = preCaretTextRange.text.length;
+		}
+		return [caretOffset -1, caretOffset - 1];
+	}
+	function getDivCaretPosition2( element ) {
 		var charIndex = 0,
 			start = 0,
 			end = 0,
